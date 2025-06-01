@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My JavaScript Projects</title>
+    <link rel="stylesheet" href="./styles.css">
+    </head>
+<style>
+    .ecommerce {
+        padding: 50px 20px;
+        text-align: center;
+    }
+    
+    .ecommerce h2 {
+        font-size: 32px;
+        margin-bottom: 40px;
+    }
+    
+    .product-container {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+    
+    .product {
+        background-color: #f1f1f1;
+        border-radius: 8px;
+        padding: 20px;
+        text-align: center;
+        width: 250px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .product:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+    
+    .product img {
+        width: 100%;
+        border-radius: 8px;
+        margin-bottom: 10px;
+    }
+    
+    .product h3 {
+        font-size: 20px;
+        margin: 10px 0;
+    }
+    
+    .product p {
+        color: #666;
+        margin-bottom: 15px;
+    }
+    
+    .add-to-cart {
+        background-color: #f39c12;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        cursor: pointer;
+        border-radius: 5px;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+    }
+    
+    .add-to-cart:hover {
+        background-color: #e67e22;
+    }
+    
+    
+    nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+main {
+    padding: 20px;
+}
+
+.product {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #218838;
+}
+</style>
+<body>
+    <header>
+        <nav class="navbar">
+            <ul>
+                <li><a href="./index.html">Home</a></li>
+                <li><a href="./Aboutme.html">About Me </a></li>
+                <li><a href="./myproject.html">My Project</a></li>
+                <li><a href="./contactus.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="products">
+            <h2>Products</h2>
+            <div class="product" data-name="Product 1" data-price="10">
+                <h3>Product 1</h3>
+                <p>Price: PKR 270</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+            <div class="product" data-name="Product 2" data-price="20">
+                <h3>Product 2</h3>
+                <p>Price: PKR</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+        </section>
+
+        <section id="cart">
+            <h2>Shopping Cart</h2>
+            <ul id="cart-items"></ul>
+            <p>Total: PKR<span id="total-price">0</span></p>
+        </section>
+    </main> 
+    <footer>
+        <p>&copy; 2024 My JavaScript Projects | All rights reserved.</p>
+    </footer>
+    <script>
+        const cartItems = [];
+const totalPriceElement = document.getElementById('total-price');
+
+document.querySelectorAll('.add-to-cart').forEach(button => {
+    button.addEventListener('click', (event) => {
+        const productElement = event.target.closest('.product');
+        const productName = productElement.getAttribute('data-name');
+        const productPrice = parseFloat(productElement.getAttribute('data-price'));
+
+        
+        cartItems.push({ name: productName, price: productPrice });
+        updateCart();
+    });
+});
+
+function updateCart() {
+    const cartItemsList = document.getElementById('cart-items');
+    cartItemsList.innerHTML = ''; 
+
+    let total = 0;
+
+    cartItems.forEach((item, index) => {
+        const li = document.createElement('li');
+        li.textContent = `${item.name}: ${item.price.toFixed(2)}`;
+
+        
+        const removeButton = document.createElement('button');
+        removeButton.textContent = 'Remove';
+        removeButton.addEventListener('click', () => {
+            removeFromCart(index);
+        });
+
+        li.appendChild(removeButton);
+        cartItemsList.appendChild(li);
+        total += item.price;
+    });
+
+    totalPriceElement.textContent = total.toFixed(2);
+}
+
+function removeFromCart(index) {
+    cartItems.splice(index, 1); 
+    updateCart(); 
+}
+    </script>
+  
+    
+</body>
+</html>

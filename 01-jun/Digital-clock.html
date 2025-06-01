@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My JavaScript Projects</title>
+    <link rel="stylesheet" href="./styles.css">
+    </head>
+<style>
+
+.clock-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 120px); 
+    text-align: center;
+    position: relative;
+}
+
+#time {
+    font-size: 10vw;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    color: blue; 
+    text-shadow: 0 0 20px purple;
+}
+
+
+#date {
+    font-size: 3vw;
+    color: blue;
+    
+}
+
+
+@media (max-width: 768px) {
+    #time {
+        font-size: 15vw; 
+    }
+}
+
+@media (max-width: 480px) {
+    #time {
+        font-size: 20vw; 
+    }
+}
+</style>
+<body>
+    <header>
+        <nav class="navbar">
+            <ul>
+                <li><a href="./index.html">Home</a></li>
+                <li><a href="././Aboutme.html">About Me </a></li>
+                <li><a href="./myproject.html">My Project</a></li>
+                <li><a href="./contactus.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    
+    <div class="clock-container">
+        <span id="time">00:00:00</span>
+        <div id="date"></div>
+    </div>
+
+   
+    <footer>
+        <p>&copy; 2024 My JavaScript Projects | All rights reserved.</p>
+    </footer>
+
+    <script>
+        function mytime() {
+            const aajkatime = new Date();
+
+           
+            const hours = String(aajkatime.getHours()).padStart(2, '0'); // padstart string object ka method hai builtin
+            const minutes = String(aajkatime.getMinutes()).padStart(2, '0');
+            const seconds = String(aajkatime.getSeconds()).padStart(2, '0');
+            const currentTime = `${hours}:${minutes}:${seconds}`;
+
+            
+            const dayOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const currentDate = aajkatime.toLocaleDateString('en-US', dayOptions);// tolocaldatestring builtin method hai date object ka 
+
+            
+            document.getElementById('time').textContent = currentTime;
+            document.getElementById('date').textContent = currentDate;
+        }
+
+        
+        setInterval(mytime, 1000);
+        mytime(); 
+    </script>
+</body>
+</html>

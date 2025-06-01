@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My JavaScript Projects</title>
+    <link rel="stylesheet" href="./styles.css">
+    </head>
+<style>
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 60vh;
+}
+
+.countdown-container {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+
+.timer-display {
+    font-size: 48px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.controls {
+    margin-top: 20px;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+</style>
+<body>
+    <header>
+        <nav class="navbar">
+            <ul>
+                <li><a href="./index.html">Home</a></li>
+                <li><a href="./Aboutme.html">About Me</a></li>
+                <li><a href="./myproject.html">My Project</a></li>
+                <li><a href="./contactus.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="countdown-container">
+            <h1>Count-Down Timer</h1>
+            <div class="timer-display">
+                <span id="seconds">00</span>:<span id="tens">00</span>
+            </div>
+            <div class="controls">
+                <button id="button-start" class="btn">Start</button>
+                <button id="button-stop" class="btn">Stop</button>
+                <button id="button-reset" class="btn">Reset</button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 My JavaScript Projects | All rights reserved.</p>
+    </footer>
+
+    <script>
+        function myfun() {
+            let seconds = 0;
+            let tens = 0; 
+            const Ten1 = document.getElementById("tens");
+            const appendSeconds = document.getElementById("seconds");
+            const buttonStart = document.getElementById('button-start');
+            const buttonStop = document.getElementById('button-stop');
+            const buttonReset = document.getElementById('button-reset');
+            let Interval;
+
+            function myTimer() {
+                tens++; 
+
+                if (tens <= 9) {
+                    Ten1.innerHTML = "0" + tens;
+                }
+
+                if (tens > 9) {
+                    Ten1.innerHTML = tens;
+                }
+
+                if (tens > 99) {
+                    seconds++;
+                    appendSeconds.innerHTML = "0" + seconds;
+                    tens = 0;
+                    Ten1.innerHTML = "00";
+                }
+
+                if (seconds > 9) {
+                    appendSeconds.innerHTML = seconds;
+                }
+            }
+ 
+            buttonStart.onclick = function() {
+                clearInterval(Interval);
+                Interval = setInterval(myTimer, 10);
+            }
+
+            buttonStop.onclick = function() {
+                clearInterval(Interval);
+            }
+
+            buttonReset.onclick = function() {
+                clearInterval(Interval);
+                tens = 0;
+                seconds = 0;
+                Ten1.innerHTML = "00";
+                appendSeconds.innerHTML = "00";
+            }     
+
+                   }
+
+        myfun();
+    </script>
+</body>
+</html>
